@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>L' 知识库</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="tn-brand" href="#/roadmap"><span class="tn-mark">L'</span> 知识库</a>
+    <nav class="tn-menu" id="tn-menu">
+      <a class="tn-item" href="#/roadmap" data-section="sql" data-tip="SQL 刷题" aria-label="SQL 刷题">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="5" rx="7.5" ry="2.8"/>
+          <path d="M4.5 5v6.5c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8V5"/>
+          <path d="M4.5 12v6.5c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8V12"/>
+        </svg>
+      </a>
+      <a class="tn-item" href="#/aibasics" data-section="ai" data-tip="AI 原理" aria-label="AI 原理">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="2.4"/>
+          <circle cx="5" cy="5.5" r="1.9"/>
+          <circle cx="19" cy="5.5" r="1.9"/>
+          <circle cx="5" cy="18.5" r="1.9"/>
+          <circle cx="19" cy="18.5" r="1.9"/>
+          <path d="M6.6 6.6 9.9 10.2M17.4 6.6 14.1 10.2M6.6 17.4 9.9 13.8M17.4 17.4 14.1 13.8"/>
+        </svg>
+      </a>
+      <a class="tn-item" href="#/modeling" data-section="model" data-tip="建模知识" aria-label="建模知识">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20h16"/>
+          <path d="M7 20v-6.5M12 20V7M17 20v-9"/>
+          <path d="M4.5 20.5 19.5 20.5"/>
+        </svg>
+      </a>
+      <a class="tn-item" href="#/biz" data-section="biz" data-tip="业务问题" aria-label="业务问题">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="3.5" width="14" height="17" rx="2.2"/>
+          <path d="M8.5 3.5h7v2h-7z"/>
+          <path d="M8.5 10h7M8.5 13.5h7M8.5 17h4.5"/>
+        </svg>
+      </a>
+    </nav>
+    <div class="tn-right"></div>
+  </div>
+</header>
+
+<div class="app">
+  <aside class="sidebar">
+    <nav class="nav" id="nav">
+      <a class="nav-item" href="#/roadmap" data-route="roadmap">
+        <span class="nav-ico">◇</span><span>学习路线</span>
+      </a>
+      <a class="nav-item" href="#/problems" data-route="problems">
+        <span class="nav-ico">▤</span><span>题库</span><span class="nav-badge" id="badge-problems"></span>
+      </a>
+      <a class="nav-item" href="#/crawler" data-route="crawler">
+        <span class="nav-ico">⌘</span><span>面经采集</span><span class="nav-badge" id="badge-drafts"></span>
+      </a>
+      <a class="nav-item" href="#/mistakes" data-route="mistakes">
+        <span class="nav-ico">✕</span><span>错题本</span><span class="nav-badge" id="badge-mistakes"></span>
+      </a>
+      <a class="nav-item" href="#/stats" data-route="stats">
+        <span class="nav-ico">◎</span><span>统计</span>
+      </a>
+      <a class="nav-item" href="#/settings" data-route="settings">
+        <span class="nav-ico">⚙</span><span>设置</span>
+      </a>
+    </nav>
+
+    <!-- 建模知识：由 app.js 按 MODELING.meta.groups 渲染的菜单栏 -->
+    <nav class="nav nav-sub" id="nav-model"></nav>
+    <!-- AI 原理：由 app.js 按 AIBASICS.sections 渲染的菜单栏 -->
+    <nav class="nav nav-sub" id="nav-ai"></nav>
+
+    <div class="side-foot">
+      <div class="progress-mini">
+        <div class="progress-mini-bar"><i id="side-progress"></i></div>
+        <div class="progress-mini-txt"><span id="side-progress-txt">0 / 0</span></div>
+      </div>
+      <div class="engine" id="engine-state">引擎加载中…</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-left">
+          <h1 id="page-title">学习路线</h1>
+          <span class="topbar-sub" id="page-sub"></span>
+        </div>
+        <div class="topbar-right">
+          <div class="search">
+            <input id="global-search" type="search" placeholder="搜索题目 / 标签，回车跳转" />
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="view" class="view"></div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="vendor/sql-wasm.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/roadmap.js"></script>
+<script src="assets/js/problems.js"></script>
+<script src="assets/js/topics.js"></script>
+<script src="assets/js/extract.js"></script>
+<script src="assets/js/aibasics.js"></script>
+<script src="assets/js/modeling.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

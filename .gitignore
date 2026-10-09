@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# 本地日志 / 临时
+*.log
+/tmp/
+
+# 依赖（本项目无构建步骤，保持纯净）
+node_modules/
